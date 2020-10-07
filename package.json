@@ -1,0 +1,36 @@
+{
+  "name": "vue-jsx-hot-loader",
+  "version": "1.0.0",
+  "description": "Tweak Vue components written in JSX in real time.",
+  "main": "dist/index.js",
+  "scripts": {},
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Amour1688/vue-jsx-hot-loader.git"
+  },
+  "keywords": [
+    "vue",
+    "jsx",
+    "hmr"
+  ],
+  "author": "Amour1688",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Amour1688/vue-jsx-hot-loader/issues"
+  },
+  "homepage": "https://github.com/Amour1688/vue-jsx-hot-loader#readme",
+  "dependencies": {
+    "@babel/parser": "^7.0.0",
+    "@babel/traverse": "^7.0.0",
+    "hash-sum": "^2.0.0",
+    "loader-utils": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/webpack": "^4.41.22",
+    "typescript": "^4.0.3",
+    "webpack": "^4.44.2"
+  }
+}
