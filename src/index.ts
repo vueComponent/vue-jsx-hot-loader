@@ -5,7 +5,7 @@ import * as loaderUtils from 'loader-utils';
 import * as t from '@babel/types';
 import traverse from '@babel/traverse';
 import { File } from '@babel/types'
-import { parse } from "@babel/parser";
+import { parse } from '@babel/parser';
 import { isDefineComponentCall, parseComponentDecls } from './utils';
 
 const hasJSX = (file: File) => {

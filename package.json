@@ -1,5 +1,5 @@
 {
-  "name": "vue-jsx-hot-loader",
+  "name": "@ant-design-vue/vue-jsx-hot-loader",
   "version": "1.0.0",
   "description": "Tweak Vue components written in JSX in real time.",
   "main": "dist/index.js",
