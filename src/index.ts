@@ -100,7 +100,7 @@ export default function loader(
   if (hotComponents.length) {
     if (defaultIdentifier) {
       const { name } = defaultIdentifier as t.Identifier;
-      source.replace(
+      source = source.replace(
         /export default defineComponent/g,
         `const ${name} = defineComponent`
       ) + `\nexport default ${name}`
@@ -114,13 +114,12 @@ export default function loader(
       callbackCode += `\n__VUE_HMR_RUNTIME__.reload("${id}", ${local})`
     }
 
-    source += `
-    /* hot reload */
-    if (module.hot) {
-      module.hot.accept()
-      ${callbackCode}
-    }
-    `
+    source +=
+      `\n/* hot reload */` +
+      `\nif (module.hot) {` +
+      `\n  module.hot.accept()` +
+      `\n  ${callbackCode}` +
+      `\n}`
   }
 
   return source;

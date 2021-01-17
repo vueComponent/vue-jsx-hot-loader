@@ -40,4 +40,5 @@ module.exports = {
       "vue-jsx-hot-loader": require.resolve("../"),
     },
   },
+  devtool: "cheap-module-eval-source-map",
 };
