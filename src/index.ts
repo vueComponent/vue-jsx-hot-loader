@@ -27,21 +27,20 @@ const hasJSX = (file: File) => {
 export default function loader(
   this: webpack.loader.LoaderContext,
   source: string,
-  sourceMap: string
 ) {
   const loaderContext = this;
   loaderContext.cacheable?.();
-  const isDev = process.env.NODE_ENV === 'development';
 
-  if (isDev) {
-    loaderContext.callback(null, source, sourceMap);
+  const isDev = loaderContext.mode === 'development';
+
+  if (!isDev) {
+    return source;
   }
 
   const file = parse(source, { sourceType: 'module', plugins: ['jsx', 'typescript'] });
 
   if (!hasJSX(file)) {
-    loaderContext.callback(null, source, sourceMap);
-    return;
+    return source;
   }
 
   const webpackRemainingChain = loaderUtils.getRemainingRequest(loaderContext).split('!');
@@ -124,5 +123,5 @@ export default function loader(
     `
   }
 
-  loaderContext.callback(null, source, sourceMap);
+  return source;
 };
