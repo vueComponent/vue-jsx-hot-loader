@@ -3,26 +3,8 @@ import hash from 'hash-sum';
 import * as path from 'path';
 import * as loaderUtils from 'loader-utils';
 import * as t from '@babel/types';
-import traverse from '@babel/traverse';
-import { File } from '@babel/types'
 import { parse } from '@babel/parser';
 import { isDefineComponentCall, parseComponentDecls } from './utils';
-
-const hasJSX = (file: File) => {
-  let fileHasJSX = false;
-  traverse(file, {
-    JSXElement(path) {
-      fileHasJSX = true;
-      path.stop();
-    },
-    JSXFragment(path) {
-      fileHasJSX = true;
-      path.stop();
-    },
-  });
-
-  return fileHasJSX;
-};
 
 export default function loader(
   this: webpack.loader.LoaderContext,
@@ -31,15 +13,7 @@ export default function loader(
   const loaderContext = this;
   loaderContext.cacheable?.();
 
-  const isDev = loaderContext.mode === 'development';
-
-  if (!isDev) {
-    return source;
-  }
-
-  const file = parse(source, { sourceType: 'module', plugins: ['jsx', 'typescript'] });
-
-  if (!hasJSX(file)) {
+  if (!(loaderContext.mode === 'development')) {
     return source;
   }
 
@@ -47,19 +21,24 @@ export default function loader(
   const fullPath = webpackRemainingChain[webpackRemainingChain.length - 1];
   const filename = path.relative(process.cwd(), fullPath);
 
+  const file = parse(source, { sourceType: 'module', plugins: ['jsx', 'typescript'] });
+
+  if (!(filename.endsWith('.jsx') || filename.endsWith('.tsx'))) {
+    return source;
+  }
+
   const declaredComponents: { name: string }[] = [];
   const hotComponents: {
     local: string;
     id: string;
   }[] = [];
-  let defaultIdentifier: t.Identifier | null = null;
+  let hasDefault = false;
 
-  traverse(file, {
-    VariableDeclaration(nodePath) {
-      declaredComponents.push(...parseComponentDecls(nodePath.node));
-    },
-    ExportNamedDeclaration(nodePath) {
-      const { specifiers = [], declaration } = nodePath.node;
+  for (const node of file.program.body) {
+    if (t.isVariableDeclaration(node)) {
+      declaredComponents.push(...parseComponentDecls(node));
+    } else if (t.isExportNamedDeclaration(node)) {
+      const { specifiers = [], declaration } = node;
       if (t.isVariableDeclaration(declaration)) {
         hotComponents.push(...parseComponentDecls(declaration).map(({ name }) => ({
           local: name,
@@ -77,33 +56,30 @@ export default function loader(
           }
         }
       }
-    },
-    ExportDefaultDeclaration(nodePath) {
-      const { declaration } = nodePath.node;
+    } else if (t.isExportDefaultDeclaration(node)) {
+      const { declaration } = node;
       if (t.isIdentifier(declaration)) {
         if (declaredComponents.find(d => d.name === declaration.name)) {
           hotComponents.push({
-            local: declaration.name,
+            local: '__default__',
             id: hash(`${filename}-default`)
           })
         }
       } else if (isDefineComponentCall(declaration)) {
-        defaultIdentifier = nodePath.scope.generateUidIdentifier('default')
         hotComponents.push({
-          local: defaultIdentifier.name,
+          local: '__default__',
           id: hash(`${filename}-default`)
         });
       }
     }
-  });
+  }
 
   if (hotComponents.length) {
-    if (defaultIdentifier) {
-      const { name } = defaultIdentifier as t.Identifier;
+    if (hasDefault) {
       source = source.replace(
         /export default defineComponent/g,
-        `const ${name} = defineComponent`
-      ) + `\nexport default ${name}`
+        `const __default__ = defineComponent`
+      ) + `\nexport default __default__`
     }
 
     let callbackCode = '';
