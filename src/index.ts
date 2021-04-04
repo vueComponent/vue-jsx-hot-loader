@@ -21,7 +21,7 @@ export default function loader(
   const fullPath = webpackRemainingChain[webpackRemainingChain.length - 1];
   const filename = path.relative(process.cwd(), fullPath);
 
-  const file = parse(source, { sourceType: 'module', plugins: ['jsx', 'typescript'] });
+  const file = parse(source, { sourceType: 'module', plugins: ['jsx', 'typescript', 'decorators-legacy'] });
 
   if (!(filename.endsWith('.jsx') || filename.endsWith('.tsx'))) {
     return source;
@@ -44,6 +44,12 @@ export default function loader(
           local: name,
           id: hash(`${filename}-${name}`),
         })));
+      } else if (t.isClassDeclaration(declaration)) {
+        const name = declaration.id.name
+        hotComponents.push({
+          local: name,
+          id: hash(`${filename}-${name}`),
+        })
       } else if (specifiers.length) {
         for (const spec of specifiers) {
           if (t.isExportSpecifier(spec) && t.isIdentifier(spec.exported)) {
