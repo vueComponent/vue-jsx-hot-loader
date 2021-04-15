@@ -76,6 +76,7 @@ export default function loader(
           local: '__default__',
           id: hash(`${filename}-default`)
         });
+        hasDefault = true
       }
     }
   }
