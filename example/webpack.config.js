@@ -1,28 +1,38 @@
-const path = require("path");
-
-const babelConfig = {
-  plugins: ["@vue/babel-plugin-jsx"],
-};
+const path = require('path')
 
 module.exports = {
-  mode: "development",
+  mode: 'development',
   entry: {
-    app: path.resolve(__dirname, "./index.js"),
+    app: path.resolve(__dirname, './index.js'),
   },
   output: {
-    path: path.resolve(__dirname, "./dist"),
-    publicPath: "/dist/",
+    path: path.resolve(__dirname, './dist'),
+    publicPath: '/dist/',
   },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.jsx$/,
         use: [
           {
-            loader: "babel-loader",
-            options: babelConfig,
+            loader: 'babel-loader',
+            options: {
+              plugins: ['@vue/babel-plugin-jsx'],
+            },
           },
-          "vue-jsx-hot-loader",
+          'vue-jsx-hot-loader',
+        ],
+      },
+      {
+        test: /\.tsx$/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              plugins: ['@vue/babel-plugin-jsx', '@babel/plugin-transform-typescript'],
+            },
+          },
+          'vue-jsx-hot-loader',
         ],
       },
     ],
@@ -30,15 +40,15 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     hot: true,
-    open: true,
+    open: false,
   },
   resolve: {
-    extensions: [".jsx", ".js"],
+    extensions: ['.jsx', '.js', '.ts', '.tsx'],
   },
   resolveLoader: {
     alias: {
-      "vue-jsx-hot-loader": require.resolve("../"),
+      'vue-jsx-hot-loader': require.resolve('../'),
     },
   },
-  devtool: "cheap-module-eval-source-map",
-};
+  devtool: 'eval-source-map',
+}

@@ -1,19 +1,19 @@
-import { Node } from '@babel/core';
-import * as t from '@babel/types';
+import { Node } from '@babel/core'
+import * as t from '@babel/types'
 
 export function isDefineComponentCall(node?: Node | null) {
-  return t.isCallExpression(node) && t.isIdentifier(node.callee) && node.callee.name === 'defineComponent';
+  return t.isCallExpression(node) && t.isIdentifier(node.callee) && node.callee.name === 'defineComponent'
 }
 
 export function parseComponentDecls(node: t.VariableDeclaration) {
-  const names = [];
+  const names = []
   for (const decl of node.declarations) {
     if (t.isIdentifier(decl.id) && isDefineComponentCall(decl.init)) {
       names.push({
-        name: decl.id.name
-      });
+        name: decl.id.name,
+      })
     }
   }
 
-  return names;
+  return names
 }
