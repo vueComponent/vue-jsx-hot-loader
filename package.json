@@ -8,8 +8,9 @@
     "dev": "tsc -w",
     "build": "tsc",
     "test": "jest --coverage",
-    "dev-example": "webpack-dev-server --config example/webpack.config.js",
-    "prepublishOnly": "tsc"
+    "dev-example": "webpack serve --config example/webpack.config.js",
+    "prepublishOnly": "tsc",
+    "prepare": "husky install"
   },
   "files": [
     "dist"
@@ -30,22 +31,43 @@
   },
   "homepage": "https://github.com/Amour1688/vue-jsx-hot-loader#readme",
   "dependencies": {
-    "@babel/parser": "^7.0.0",
-    "@babel/traverse": "^7.0.0",
-    "hash-sum": "^2.0.0",
-    "loader-utils": "^2.0.0",
+    "@babel/parser": "^7.14.6",
+    "@babel/traverse": "^7.14.6",
     "lodash-es": "^4.17.20"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.10",
-    "@types/loader-utils": "^2.0.1",
-    "@vue/babel-plugin-jsx": "^1.0.0",
+    "@babel/core": "^7.14.6",
+    "@babel/plugin-transform-typescript": "^7.14.6",
+    "@babel/preset-env": "^7.14.7",
+    "@types/hash-sum": "^1.0.0",
+    "@types/jest": "^26.0.24",
+    "@typescript-eslint/eslint-plugin": "^4.28.3",
+    "@typescript-eslint/parser": "^4.28.3",
+    "@vue/babel-plugin-jsx": "^1.0.6",
+    "babel-jest": "^27.0.6",
     "babel-loader": "^8.2.2",
+    "eslint": "^7.31.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "hash-sum": "^2.0.0",
+    "husky": "^7.0.1",
     "jest": "^26.6.3",
-    "typescript": "^4.0.3",
-    "vue": "^3.0.5",
-    "webpack": "^4.44.2",
-    "webpack-cli": "^3.0.0",
-    "webpack-dev-server": "^3.11.1"
+    "lint-staged": ">=10",
+    "memfs": "^3.2.2",
+    "prettier": "^2.3.2",
+    "ts-jest": "^26.5.3",
+    "typescript": "^4.3.5",
+    "vue": "^3.1.5",
+    "webpack": "^5.45.1",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "lint-staged": {
+    "*.{ts,jsx,tsx}": [
+      "eslint --cache --fix"
+    ],
+    "*.{js,ts,jsx,tsx}": [
+      "prettier --write"
+    ]
   }
 }
