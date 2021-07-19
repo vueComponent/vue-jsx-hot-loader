@@ -1,21 +1,18 @@
-import * as webpack from 'webpack'
 import hash from 'hash-sum'
 import * as path from 'path'
+import { LoaderContext } from 'webpack'
 import * as t from '@babel/types'
 import { parse } from '@babel/parser'
 import { isDefineComponentCall, parseComponentDecls } from './utils'
 
 export interface Options {}
 
-export default function loader(this: webpack.LoaderContext<Options>, source: string) {
-  const loaderContext = this
-  loaderContext.cacheable?.()
-
-  if (!(loaderContext.mode === 'development')) {
+export default function loader(this: LoaderContext<Options>, source: string): string {
+  if (!(this.mode === 'development')) {
     return source
   }
 
-  const webpackRemainingChain = loaderContext.remainingRequest.split('!')
+  const webpackRemainingChain = this.remainingRequest.split('!')
   const fullPath = webpackRemainingChain[webpackRemainingChain.length - 1]
   const filename = path.relative(process.cwd(), fullPath)
 
@@ -31,7 +28,6 @@ export default function loader(this: webpack.LoaderContext<Options>, source: str
     id: string
   }[] = []
   let hasDefault = false
-
   for (const node of file.program.body) {
     if (t.isVariableDeclaration(node)) {
       declaredComponents.push(...parseComponentDecls(node))
@@ -80,22 +76,22 @@ export default function loader(this: webpack.LoaderContext<Options>, source: str
       }
     }
   }
-
+  let _source = source
   if (hotComponents.length) {
     if (hasDefault) {
-      source =
+      _source =
         source.replace(/export default defineComponent/g, `const __default__ = defineComponent`) +
         `\nexport default __default__`
     }
 
     let callbackCode = ''
     for (const { local, id } of hotComponents) {
-      source += `\n${local}.__hmrId = '${id}'` + `\n__VUE_HMR_RUNTIME__.createRecord('${id}', ${local})`
+      _source += `\n${local}.__hmrId = '${id}'` + `\n__VUE_HMR_RUNTIME__.createRecord('${id}', ${local})`
       callbackCode += `\n__VUE_HMR_RUNTIME__.reload("${id}", ${local})`
     }
 
-    source += `\n/* hot reload */` + `\nif (module.hot) {` + `\n  module.hot.accept()` + `\n  ${callbackCode}` + `\n}`
+    _source += `\n/* hot reload */` + `\nif (module.hot) {` + `\n  module.hot.accept()` + `\n  ${callbackCode}` + `\n}`
   }
 
-  return source
+  return _source
 }

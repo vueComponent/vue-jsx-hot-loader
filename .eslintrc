@@ -16,5 +16,7 @@
     "eslint:recommended",
     "prettier"
   ],
-  "rules": {}
+  "rules": {
+    "no-undef": "off"
+  }
 }

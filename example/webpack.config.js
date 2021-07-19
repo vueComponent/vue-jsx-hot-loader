@@ -1,35 +1,24 @@
-const path = require('path')
+const { resolve: _resolve } = require('path')
 
 module.exports = {
   mode: 'development',
   entry: {
-    app: path.resolve(__dirname, './index.js'),
+    app: _resolve(__dirname, './index.js'),
   },
   output: {
-    path: path.resolve(__dirname, './dist'),
+    path: _resolve(__dirname, './dist'),
     publicPath: '/dist/',
   },
   module: {
     rules: [
       {
-        test: /\.jsx$/,
+        test: /\.(j|t)sx$/,
         use: [
           {
             loader: 'babel-loader',
             options: {
+              presets: ['@babel/preset-env', '@babel/preset-typescript'],
               plugins: ['@vue/babel-plugin-jsx'],
-            },
-          },
-          'vue-jsx-hot-loader',
-        ],
-      },
-      {
-        test: /\.tsx$/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              plugins: ['@vue/babel-plugin-jsx', '@babel/plugin-transform-typescript'],
             },
           },
           'vue-jsx-hot-loader',

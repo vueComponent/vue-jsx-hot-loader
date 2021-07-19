@@ -1,11 +1,11 @@
 import { Node } from '@babel/core'
 import * as t from '@babel/types'
 
-export function isDefineComponentCall(node?: Node | null) {
+export function isDefineComponentCall(node?: Node | null): boolean {
   return t.isCallExpression(node) && t.isIdentifier(node.callee) && node.callee.name === 'defineComponent'
 }
 
-export function parseComponentDecls(node: t.VariableDeclaration) {
+export function parseComponentDecls(node: t.VariableDeclaration): { name: string }[] {
   const names = []
   for (const decl of node.declarations) {
     if (t.isIdentifier(decl.id) && isDefineComponentCall(decl.init)) {

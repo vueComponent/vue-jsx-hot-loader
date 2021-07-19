@@ -1,12 +1,13 @@
 import path from 'path'
-import webpack from 'webpack'
-import { createFsFromVolume, Volume } from 'memfs'
+import webpack, { Stats } from 'webpack'
+import memoryfs from 'memory-fs'
 interface Options {}
 
-export default (fixture: string, options: Options = {}) => {
+export default (fixture: string, options: Options = {}): Promise<Stats> => {
   const compiler = webpack({
     context: __dirname,
-    entry: `./${fixture}`,
+    entry: fixture,
+    mode: 'development',
     output: {
       path: path.resolve(__dirname),
       filename: 'bundle.js',
@@ -14,7 +15,7 @@ export default (fixture: string, options: Options = {}) => {
     module: {
       rules: [
         {
-          test: /\.jsx$/,
+          test: /\.tsx$/,
           use: [
             {
               loader: 'babel-loader',
@@ -23,7 +24,7 @@ export default (fixture: string, options: Options = {}) => {
               },
             },
             {
-              loader: path.resolve(__dirname, '../src/index'),
+              loader: path.resolve(__dirname, '../src/index.ts'),
               options,
             },
           ],
@@ -32,15 +33,16 @@ export default (fixture: string, options: Options = {}) => {
     },
   })
 
-  compiler.outputFileSystem = createFsFromVolume(new Volume())
-  compiler.outputFileSystem.join = path.join.bind(path)
+  compiler.outputFileSystem = new memoryfs()
 
-  return new Promise((resolve, reject) => {
+  return new Promise<webpack.Stats>((resolve, reject) => {
     compiler.run((err, stats) => {
       if (err) reject(err)
-      if (!stats) reject(new Error())
-
-      resolve(stats)
+      if (stats) {
+        resolve(stats)
+      } else {
+        reject()
+      }
     })
   })
 }
