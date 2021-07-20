@@ -3,6 +3,7 @@
     "baseUrl": ".",
     "outDir": "dist",
     "sourceMap": true,
+    "rootDir": ".",
     "target": "es2015",
     "module": "commonjs",
     "moduleResolution": "node",

@@ -1,1 +1,1 @@
-export default () => <div>23423423411dd</div>;
+export default () => <div>234324</div>

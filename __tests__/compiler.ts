@@ -1,25 +1,26 @@
 import path from 'path'
-import webpack, { Stats } from 'webpack'
-import memoryfs from 'memory-fs'
+import webpack from 'webpack'
+import { createFsFromVolume, Volume } from 'memfs'
 interface Options {}
 
-export default (fixture: string, options: Options = {}): Promise<Stats> => {
+export default (fixture: string, options: Options = {}): Promise<string | undefined> => {
   const compiler = webpack({
     context: __dirname,
     entry: fixture,
     mode: 'development',
     output: {
-      path: path.resolve(__dirname),
-      filename: 'bundle.js',
+      path: '/',
+      filename: 'test.bundle.js',
     },
     module: {
       rules: [
         {
-          test: /\.tsx$/,
+          test: /\.(t|j)sx?$/,
           use: [
             {
               loader: 'babel-loader',
               options: {
+                presets: ['@babel/preset-typescript'],
                 plugins: ['@vue/babel-plugin-jsx'],
               },
             },
@@ -31,17 +32,33 @@ export default (fixture: string, options: Options = {}): Promise<Stats> => {
         },
       ],
     },
+    resolve: {
+      extensions: ['.jsx', '.tsx', '.ts', '.js'],
+    },
   })
 
-  compiler.outputFileSystem = new memoryfs()
+  const mfs = createFsFromVolume(new Volume())
+  compiler.outputFileSystem = mfs
+  compiler.outputFileSystem.join = path.join.bind(path)
 
-  return new Promise<webpack.Stats>((resolve, reject) => {
+  return new Promise((resolve) => {
     compiler.run((err, stats) => {
-      if (err) reject(err)
-      if (stats) {
-        resolve(stats)
+      expect(err).toBeNull()
+      if (stats?.hasErrors()) {
+        return console.error(stats.toString('errors-only'))
+      }
+      expect(stats?.hasErrors()).toBeFalsy()
+      if (!stats) {
+        console.error('stats is undefined')
       } else {
-        reject()
+        const modules = stats.toJson({ source: true }).modules
+        if (!modules) {
+          console.error('modules is undefined')
+        }
+        expect(modules).not.toBeUndefined()
+        if (modules) {
+          resolve(modules[0].source?.toString())
+        }
       }
     })
   })

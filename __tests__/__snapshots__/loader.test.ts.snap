@@ -1,74 +1,109 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`vue-jsx-hot-loader test cases file A should be transform right 1`] = `
-"export default () => <div>23423423411dd</div>;
-"
+exports[`vue-jsx-hot-loader test cases file A should be transformed right 1`] = `
+"import { createVNode as _createVNode, createTextVNode as _createTextVNode } from \\"vue\\";
+export default (() => _createVNode(\\"div\\", null, [_createTextVNode(\\"234324\\")]));"
 `;
 
-exports[`vue-jsx-hot-loader test cases file App should be transform right 1`] = `
-"import { defineComponent } from 'vue'
-import A from './A'
-import { B } from './B'
-import C from './C'
-
+exports[`vue-jsx-hot-loader test cases file App should be transformed right 1`] = `
+"import { createVNode as _createVNode, createTextVNode as _createTextVNode, Fragment as _Fragment } from \\"vue\\";
+import { defineComponent } from 'vue';
+import A from './A';
+import { B } from './B';
+import C from './C';
 const App = defineComponent({
   data() {
     return {
-      a: 1,
-    }
+      a: 1
+    };
   },
+
   render() {
-    const { a } = this
-    return (
-      <>
-        {a}
-        <div
-          onClick={() => {
-            this.a++
-          }}
-        >
-          Hello World!
-        </div>
-        <A />
-        <B />
-        <C />
-      </>
-    )
-  },
-})
-export default App
-"
+    const {
+      a
+    } = this;
+    return _createVNode(_Fragment, null, [a, _createVNode(\\"div\\", {
+      \\"onClick\\": () => {
+        this.a++;
+      }
+    }, [_createTextVNode(\\"Hello World!\\")]), _createVNode(A, null, null), _createVNode(B, null, null), _createVNode(C, null, null)]);
+  }
+
+});
+export default App;
+App.__hmrId = '4a166efb';
+
+__VUE_HMR_RUNTIME__.createRecord('4a166efb', App);
+/* hot reload */
+
+
+if (module.hot) {
+  module.hot.accept();
+
+  __VUE_HMR_RUNTIME__.reload(\\"4a166efb\\", App);
+}"
 `;
 
-exports[`vue-jsx-hot-loader test cases file B should be transform right 1`] = `
-"import { defineComponent } from 'vue';
-
+exports[`vue-jsx-hot-loader test cases file B should be transformed right 1`] = `
+"import { createVNode as _createVNode, createTextVNode as _createTextVNode, Fragment as _Fragment } from \\"vue\\";
+import { defineComponent } from 'vue';
 const B = defineComponent({
   data() {
     return {
       a: 1
-    }
+    };
   },
+
   render() {
-    const { a } = this;
-    return (
-      <>
-        <div onClick={() => { this.a++; }}>{a}d4s</div>
-        <span>2324234</span>
-      </>
-    );
+    const {
+      a
+    } = this;
+    return _createVNode(_Fragment, null, [_createVNode(\\"div\\", {
+      \\"onClick\\": () => {
+        this.a++;
+      }
+    }, [a, _createTextVNode(\\"d4s\\")]), _createVNode(\\"span\\", null, [_createTextVNode(\\"2324234\\")])]);
   }
+
+});
+export { B };
+B.__hmrId = '6f548b3d';
+
+__VUE_HMR_RUNTIME__.createRecord('6f548b3d', B);
+/* hot reload */
+
+
+if (module.hot) {
+  module.hot.accept();
+
+  __VUE_HMR_RUNTIME__.reload(\\"6f548b3d\\", B);
+}"
+`;
+
+exports[`vue-jsx-hot-loader test cases file C should be transformed right 1`] = `
+"import { createVNode as _createVNode } from \\"vue\\";
+import { defineComponent } from 'vue';
+
+const __default__ = defineComponent({
+  setup() {
+    const string = 'component C';
+    return () => _createVNode(\\"div\\", null, [string]);
+  }
+
 });
 
-export {
-  B
-};
-"
+export default __default__;
+__default__.__hmrId = '94f209f2';
+
+__VUE_HMR_RUNTIME__.createRecord('94f209f2', __default__);
+/* hot reload */
+
+
+if (module.hot) {
+  module.hot.accept();
+
+  __VUE_HMR_RUNTIME__.reload(\\"94f209f2\\", __default__);
+}"
 `;
 
-exports[`vue-jsx-hot-loader test cases file C should be transform right 1`] = `undefined`;
-
-exports[`vue-jsx-hot-loader test cases file t.ts should be transform right 1`] = `
-"export const test = '123'
-"
-`;
+exports[`vue-jsx-hot-loader test cases file t should be transformed right 1`] = `"export const test = '123';"`;

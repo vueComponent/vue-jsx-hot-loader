@@ -15,7 +15,6 @@ export default function loader(this: LoaderContext<Options>, source: string): st
   const webpackRemainingChain = this.remainingRequest.split('!')
   const fullPath = webpackRemainingChain[webpackRemainingChain.length - 1]
   const filename = path.relative(process.cwd(), fullPath)
-
   const file = parse(source, { sourceType: 'module', plugins: ['jsx', 'typescript', 'decorators-legacy'] })
 
   if (!(filename.endsWith('.jsx') || filename.endsWith('.tsx'))) {
@@ -92,6 +91,5 @@ export default function loader(this: LoaderContext<Options>, source: string): st
 
     _source += `\n/* hot reload */` + `\nif (module.hot) {` + `\n  module.hot.accept()` + `\n  ${callbackCode}` + `\n}`
   }
-
   return _source
 }
