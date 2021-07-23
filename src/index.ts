@@ -67,7 +67,7 @@ export default function loader(
       if (t.isIdentifier(declaration)) {
         if (declaredComponents.find(d => d.name === declaration.name)) {
           hotComponents.push({
-            local: '__default__',
+            local: declaration.name,
             id: hash(`${filename}-default`)
           })
         }
@@ -76,6 +76,7 @@ export default function loader(
           local: '__default__',
           id: hash(`${filename}-default`)
         });
+        hasDefault = true
       }
     }
   }

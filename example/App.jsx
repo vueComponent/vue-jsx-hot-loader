@@ -1,7 +1,7 @@
 import { defineComponent } from 'vue';
 import A from './A';
 import { B } from './B';
-
+import C from './C'
 const App = defineComponent({
   data() {
     return {
@@ -16,6 +16,7 @@ const App = defineComponent({
         <div onClick={() => { this.a++; }}>Hello World!</div>
         <A />
         <B />
+        <C />
       </>
     )
   }
