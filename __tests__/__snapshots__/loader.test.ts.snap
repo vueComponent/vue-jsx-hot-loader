@@ -2,15 +2,15 @@
 
 exports[`vue-jsx-hot-loader test cases file A should be transformed right 1`] = `
 "import { createVNode as _createVNode, createTextVNode as _createTextVNode } from \\"vue\\";
-export default (() => _createVNode(\\"div\\", null, [_createTextVNode(\\"234324\\")]));"
+export default (() => _createVNode(\\"div\\", null, [_createTextVNode(\\"23411dd\\")]));"
 `;
 
 exports[`vue-jsx-hot-loader test cases file App should be transformed right 1`] = `
 "import { createVNode as _createVNode, createTextVNode as _createTextVNode, Fragment as _Fragment } from \\"vue\\";
-import { defineComponent } from 'vue';
-import A from './A';
-import { B } from './B';
-import C from './C';
+import { defineComponent } from \\"vue\\";
+import A from \\"./A\\";
+import { B } from \\"./B\\";
+import C from \\"./C\\";
 const App = defineComponent({
   data() {
     return {
@@ -46,7 +46,7 @@ if (module.hot) {
 
 exports[`vue-jsx-hot-loader test cases file B should be transformed right 1`] = `
 "import { createVNode as _createVNode, createTextVNode as _createTextVNode, Fragment as _Fragment } from \\"vue\\";
-import { defineComponent } from 'vue';
+import { defineComponent } from \\"vue\\";
 const B = defineComponent({
   data() {
     return {
@@ -62,7 +62,7 @@ const B = defineComponent({
       \\"onClick\\": () => {
         this.a++;
       }
-    }, [a, _createTextVNode(\\"d4s\\")]), _createVNode(\\"span\\", null, [_createTextVNode(\\"2324234\\")])]);
+    }, [a, _createTextVNode(\\"d4s\\")]), _createVNode(\\"span\\", null, [_createTextVNode(\\"2\\")])]);
   }
 
 });
@@ -82,11 +82,11 @@ if (module.hot) {
 
 exports[`vue-jsx-hot-loader test cases file C should be transformed right 1`] = `
 "import { createVNode as _createVNode } from \\"vue\\";
-import { defineComponent } from 'vue';
+import { defineComponent } from \\"vue\\";
 
 const __default__ = defineComponent({
   setup() {
-    const string = 'component C';
+    const string = \\"component C\\";
     return () => _createVNode(\\"div\\", null, [string]);
   }
 
@@ -106,4 +106,4 @@ if (module.hot) {
 }"
 `;
 
-exports[`vue-jsx-hot-loader test cases file t should be transformed right 1`] = `"export const test = '123';"`;
+exports[`vue-jsx-hot-loader test cases file t should be transformed right 1`] = `"export const test = \\"123\\";"`;

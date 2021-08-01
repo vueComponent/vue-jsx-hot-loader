@@ -1,22 +1,22 @@
-import { defineComponent } from 'vue'
-import A from './A'
-import { B } from './B'
-import C from './C'
+import { defineComponent } from "vue";
+import A from "./A";
+import { B } from "./B";
+import C from "./C";
 
 const App = defineComponent({
   data() {
     return {
       a: 1,
-    }
+    };
   },
   render() {
-    const { a } = this
+    const { a } = this;
     return (
       <>
         {a}
         <div
           onClick={() => {
-            this.a++
+            this.a++;
           }}
         >
           Hello World!
@@ -25,7 +25,7 @@ const App = defineComponent({
         <B />
         <C />
       </>
-    )
+    );
   },
-})
-export default App
+});
+export default App;

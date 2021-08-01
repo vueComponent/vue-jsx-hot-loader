@@ -8,8 +8,7 @@
     "prepare": "husky install",
     "dev": "tsc -w",
     "build": "tsc",
-    "test": "jest",
-    "test-coverage": "jest --coverage",
+    "test": "jest --coverage",
     "dev-example": "webpack serve --config example/webpack.config.js",
     "prepublishOnly": "tsc",
     "lint": "eslint --fix ./src --ext .vue,.js,.ts,.tsx"

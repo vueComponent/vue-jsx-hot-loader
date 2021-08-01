@@ -1,9 +1,9 @@
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue";
 
 export default defineComponent({
   setup() {
-    const string: string = 'component C'
+    const string: string = "component C";
 
-    return () => <div>{string}</div>
+    return () => <div>{string}</div>;
   },
-})
+});
