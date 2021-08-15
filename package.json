@@ -2,47 +2,51 @@
   "name": "@ant-design-vue/vue-jsx-hot-loader",
   "version": "0.1.4",
   "description": "Tweak Vue components written in JSX in real time.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "scripts": {
-    "prepare": "husky install",
-    "dev": "tsc -w",
-    "build": "tsc",
-    "test": "jest --coverage",
-    "dev-example": "webpack serve --config example/webpack.config.js",
-    "prepublishOnly": "tsc",
-    "lint": "eslint --fix ./src --ext .vue,.js,.ts,.tsx"
-  },
-  "files": [
-    "dist"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Amour1688/vue-jsx-hot-loader.git"
-  },
   "keywords": [
     "vue",
     "jsx",
     "hmr"
   ],
-  "author": "Amour1688",
-  "license": "MIT",
+  "homepage": "https://github.com/Amour1688/vue-jsx-hot-loader#readme",
   "bugs": {
     "url": "https://github.com/Amour1688/vue-jsx-hot-loader/issues"
   },
-  "homepage": "https://github.com/Amour1688/vue-jsx-hot-loader#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Amour1688/vue-jsx-hot-loader.git"
+  },
+  "license": "MIT",
+  "author": "Amour1688",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rm -rf dist && tsc --sourceMap false",
+    "dev": "tsc -w",
+    "dev-example": "webpack serve --config example/webpack.config.js",
+    "lint": "eslint --fix ./src --ext .vue,.js,.ts,.tsx",
+    "prepublishOnly": "tsc",
+    "test": "jest --coverage"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint",
+      "prettier --write"
+    ]
+  },
   "dependencies": {
+    "@babel/parser": "^7.0.0",
+    "@babel/types": "^7.0.0",
     "hash-sum": "^2.0.0",
-    "loader-utils": "^2.0.0",
-    "lodash-es": "^4.17.20"
+    "loader-utils": "^2.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.14.6",
-    "@babel/parser": "^7.14.7",
+    "@babel/core": "^7.0.0",
     "@babel/plugin-transform-typescript": "^7.14.6",
     "@babel/preset-env": "^7.14.7",
     "@babel/preset-typescript": "^7.14.5",
-    "@babel/traverse": "^7.14.7",
     "@types/hash-sum": "^1.0.0",
     "@types/jest": "^26.0.24",
     "@types/memory-fs": "^0.3.3",
@@ -66,11 +70,5 @@
     "webpack": "^5.42.1",
     "webpack-cli": "^4.7.2",
     "webpack-dev-server": "^3.11.2"
-  },
-  "lint-staged": {
-    "*.{js,ts,tsx}": [
-      "eslint",
-      "prettier --write"
-    ]
   }
 }

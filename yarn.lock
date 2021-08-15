@@ -21,7 +21,33 @@
   resolved "https://registry.nlark.com/@babel/compat-data/download/@babel/compat-data-7.14.7.tgz#7b047d7a3a89a67d2258dc61f604f098f1bc7e08"
   integrity sha1-ewR9ejqJpn0iWNxh9gTwmPG8fgg=
 
-"@babel/core@^7.1.0", "@babel/core@^7.14.6", "@babel/core@^7.7.5":
+"@babel/compat-data@^7.15.0":
+  version "7.15.0"
+  resolved "https://bnpm.byted.org/@babel/compat-data/-/@babel/compat-data-7.15.0.tgz#2dbaf8b85334796cafbb0f5793a90a2fc010b176"
+  integrity sha1-Lbr4uFM0eWyvuw9Xk6kKL8AQsXY=
+
+"@babel/core@^7.0.0":
+  version "7.15.0"
+  resolved "https://bnpm.byted.org/@babel/core/-/@babel/core-7.15.0.tgz#749e57c68778b73ad8082775561f67f5196aafa8"
+  integrity sha1-dJ5Xxod4tzrYCCd1Vh9n9Rlqr6g=
+  dependencies:
+    "@babel/code-frame" "^7.14.5"
+    "@babel/generator" "^7.15.0"
+    "@babel/helper-compilation-targets" "^7.15.0"
+    "@babel/helper-module-transforms" "^7.15.0"
+    "@babel/helpers" "^7.14.8"
+    "@babel/parser" "^7.15.0"
+    "@babel/template" "^7.14.5"
+    "@babel/traverse" "^7.15.0"
+    "@babel/types" "^7.15.0"
+    convert-source-map "^1.7.0"
+    debug "^4.1.0"
+    gensync "^1.0.0-beta.2"
+    json5 "^2.1.2"
+    semver "^6.3.0"
+    source-map "^0.5.0"
+
+"@babel/core@^7.1.0", "@babel/core@^7.7.5":
   version "7.14.6"
   resolved "https://registry.nlark.com/@babel/core/download/@babel/core-7.14.6.tgz#e0814ec1a950032ff16c13a2721de39a8416fcab"
   integrity sha1-4IFOwalQAy/xbBOich3jmoQW/Ks=
@@ -51,6 +77,15 @@
     jsesc "^2.5.1"
     source-map "^0.5.0"
 
+"@babel/generator@^7.15.0":
+  version "7.15.0"
+  resolved "https://bnpm.byted.org/@babel/generator/-/@babel/generator-7.15.0.tgz#a7d0c172e0d814974bad5aa77ace543b97917f15"
+  integrity sha1-p9DBcuDYFJdLrVqnes5UO5eRfxU=
+  dependencies:
+    "@babel/types" "^7.15.0"
+    jsesc "^2.5.1"
+    source-map "^0.5.0"
+
 "@babel/helper-annotate-as-pure@^7.14.5":
   version "7.14.5"
   resolved "https://registry.nlark.com/@babel/helper-annotate-as-pure/download/@babel/helper-annotate-as-pure-7.14.5.tgz?cache=0&sync_timestamp=1623280393672&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40babel%2Fhelper-annotate-as-pure%2Fdownload%2F%40babel%2Fhelper-annotate-as-pure-7.14.5.tgz#7bf478ec3b71726d56a8ca5775b046fc29879e61"
@@ -72,6 +107,16 @@
   integrity sha1-epnF0JZ5Eely/iw0EffVtJhJjs8=
   dependencies:
     "@babel/compat-data" "^7.14.5"
+    "@babel/helper-validator-option" "^7.14.5"
+    browserslist "^4.16.6"
+    semver "^6.3.0"
+
+"@babel/helper-compilation-targets@^7.15.0":
+  version "7.15.0"
+  resolved "https://bnpm.byted.org/@babel/helper-compilation-targets/-/@babel/helper-compilation-targets-7.15.0.tgz#973df8cbd025515f3ff25db0c05efc704fa79818"
+  integrity sha1-lz34y9AlUV8/8l2wwF78cE+nmBg=
+  dependencies:
+    "@babel/compat-data" "^7.15.0"
     "@babel/helper-validator-option" "^7.14.5"
     browserslist "^4.16.6"
     semver "^6.3.0"
@@ -147,6 +192,13 @@
   dependencies:
     "@babel/types" "^7.14.5"
 
+"@babel/helper-member-expression-to-functions@^7.15.0":
+  version "7.15.0"
+  resolved "https://bnpm.byted.org/@babel/helper-member-expression-to-functions/-/@babel/helper-member-expression-to-functions-7.15.0.tgz#0ddaf5299c8179f27f37327936553e9bba60990b"
+  integrity sha1-Ddr1KZyBefJ/NzJ5NlU+m7pgmQs=
+  dependencies:
+    "@babel/types" "^7.15.0"
+
 "@babel/helper-module-imports@^7.0.0", "@babel/helper-module-imports@^7.12.13", "@babel/helper-module-imports@^7.14.5":
   version "7.14.5"
   resolved "https://registry.nlark.com/@babel/helper-module-imports/download/@babel/helper-module-imports-7.14.5.tgz?cache=0&sync_timestamp=1623280362184&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40babel%2Fhelper-module-imports%2Fdownload%2F%40babel%2Fhelper-module-imports-7.14.5.tgz#6d1a44df6a38c957aa7c312da076429f11b422f3"
@@ -167,6 +219,20 @@
     "@babel/template" "^7.14.5"
     "@babel/traverse" "^7.14.5"
     "@babel/types" "^7.14.5"
+
+"@babel/helper-module-transforms@^7.15.0":
+  version "7.15.0"
+  resolved "https://bnpm.byted.org/@babel/helper-module-transforms/-/@babel/helper-module-transforms-7.15.0.tgz#679275581ea056373eddbe360e1419ef23783b08"
+  integrity sha1-Z5J1WB6gVjc+3b42DhQZ7yN4Owg=
+  dependencies:
+    "@babel/helper-module-imports" "^7.14.5"
+    "@babel/helper-replace-supers" "^7.15.0"
+    "@babel/helper-simple-access" "^7.14.8"
+    "@babel/helper-split-export-declaration" "^7.14.5"
+    "@babel/helper-validator-identifier" "^7.14.9"
+    "@babel/template" "^7.14.5"
+    "@babel/traverse" "^7.15.0"
+    "@babel/types" "^7.15.0"
 
 "@babel/helper-optimise-call-expression@^7.14.5":
   version "7.14.5"
@@ -199,12 +265,29 @@
     "@babel/traverse" "^7.14.5"
     "@babel/types" "^7.14.5"
 
+"@babel/helper-replace-supers@^7.15.0":
+  version "7.15.0"
+  resolved "https://bnpm.byted.org/@babel/helper-replace-supers/-/@babel/helper-replace-supers-7.15.0.tgz#ace07708f5bf746bf2e6ba99572cce79b5d4e7f4"
+  integrity sha1-rOB3CPW/dGvy5rqZVyzOebXU5/Q=
+  dependencies:
+    "@babel/helper-member-expression-to-functions" "^7.15.0"
+    "@babel/helper-optimise-call-expression" "^7.14.5"
+    "@babel/traverse" "^7.15.0"
+    "@babel/types" "^7.15.0"
+
 "@babel/helper-simple-access@^7.14.5":
   version "7.14.5"
   resolved "https://registry.nlark.com/@babel/helper-simple-access/download/@babel/helper-simple-access-7.14.5.tgz#66ea85cf53ba0b4e588ba77fc813f53abcaa41c4"
   integrity sha1-ZuqFz1O6C05Yi6d/yBP1OryqQcQ=
   dependencies:
     "@babel/types" "^7.14.5"
+
+"@babel/helper-simple-access@^7.14.8":
+  version "7.14.8"
+  resolved "https://bnpm.byted.org/@babel/helper-simple-access/-/@babel/helper-simple-access-7.14.8.tgz#82e1fec0644a7e775c74d305f212c39f8fe73924"
+  integrity sha1-guH+wGRKfndcdNMF8hLDn4/nOSQ=
+  dependencies:
+    "@babel/types" "^7.14.8"
 
 "@babel/helper-skip-transparent-expression-wrappers@^7.14.5":
   version "7.14.5"
@@ -224,6 +307,11 @@
   version "7.14.5"
   resolved "https://registry.nlark.com/@babel/helper-validator-identifier/download/@babel/helper-validator-identifier-7.14.5.tgz?cache=0&sync_timestamp=1623280293264&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40babel%2Fhelper-validator-identifier%2Fdownload%2F%40babel%2Fhelper-validator-identifier-7.14.5.tgz#d0f0e277c512e0c938277faa85a3968c9a44c0e8"
   integrity sha1-0PDid8US4Mk4J3+qhaOWjJpEwOg=
+
+"@babel/helper-validator-identifier@^7.14.9":
+  version "7.14.9"
+  resolved "https://bnpm.byted.org/@babel/helper-validator-identifier/-/@babel/helper-validator-identifier-7.14.9.tgz#6654d171b2024f6d8ee151bf2509699919131d48"
+  integrity sha1-ZlTRcbICT22O4VG/JQlpmRkTHUg=
 
 "@babel/helper-validator-option@^7.14.5":
   version "7.14.5"
@@ -249,6 +337,15 @@
     "@babel/traverse" "^7.14.5"
     "@babel/types" "^7.14.5"
 
+"@babel/helpers@^7.14.8":
+  version "7.15.3"
+  resolved "https://bnpm.byted.org/@babel/helpers/-/@babel/helpers-7.15.3.tgz#c96838b752b95dcd525b4e741ed40bb1dc2a1357"
+  integrity sha1-yWg4t1K5Xc1SW050HtQLsdwqE1c=
+  dependencies:
+    "@babel/template" "^7.14.5"
+    "@babel/traverse" "^7.15.0"
+    "@babel/types" "^7.15.0"
+
 "@babel/highlight@^7.10.4", "@babel/highlight@^7.14.5":
   version "7.14.5"
   resolved "https://registry.nlark.com/@babel/highlight/download/@babel/highlight-7.14.5.tgz?cache=0&sync_timestamp=1623280393681&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40babel%2Fhighlight%2Fdownload%2F%40babel%2Fhighlight-7.14.5.tgz#6861a52f03966405001f6aa534a01a24d99e8cd9"
@@ -257,6 +354,11 @@
     "@babel/helper-validator-identifier" "^7.14.5"
     chalk "^2.0.0"
     js-tokens "^4.0.0"
+
+"@babel/parser@^7.0.0", "@babel/parser@^7.15.0":
+  version "7.15.3"
+  resolved "https://bnpm.byted.org/@babel/parser/-/@babel/parser-7.15.3.tgz#3416d9bea748052cfcb63dbcc27368105b1ed862"
+  integrity sha1-NBbZvqdIBSz8tj28wnNoEFse2GI=
 
 "@babel/parser@^7.1.0", "@babel/parser@^7.12.0", "@babel/parser@^7.14.5", "@babel/parser@^7.14.6", "@babel/parser@^7.14.7":
   version "7.14.7"
@@ -898,7 +1000,7 @@
     "@babel/parser" "^7.14.5"
     "@babel/types" "^7.14.5"
 
-"@babel/traverse@^7.0.0", "@babel/traverse@^7.1.0", "@babel/traverse@^7.13.0", "@babel/traverse@^7.14.5", "@babel/traverse@^7.14.7":
+"@babel/traverse@^7.0.0", "@babel/traverse@^7.1.0", "@babel/traverse@^7.13.0", "@babel/traverse@^7.14.5":
   version "7.14.7"
   resolved "https://registry.nlark.com/@babel/traverse/download/@babel/traverse-7.14.7.tgz#64007c9774cfdc3abd23b0780bc18a3ce3631753"
   integrity sha1-ZAB8l3TP3Dq9I7B4C8GKPONjF1M=
@@ -913,12 +1015,35 @@
     debug "^4.1.0"
     globals "^11.1.0"
 
+"@babel/traverse@^7.15.0":
+  version "7.15.0"
+  resolved "https://bnpm.byted.org/@babel/traverse/-/@babel/traverse-7.15.0.tgz#4cca838fd1b2a03283c1f38e141f639d60b3fc98"
+  integrity sha1-TMqDj9GyoDKDwfOOFB9jnWCz/Jg=
+  dependencies:
+    "@babel/code-frame" "^7.14.5"
+    "@babel/generator" "^7.15.0"
+    "@babel/helper-function-name" "^7.14.5"
+    "@babel/helper-hoist-variables" "^7.14.5"
+    "@babel/helper-split-export-declaration" "^7.14.5"
+    "@babel/parser" "^7.15.0"
+    "@babel/types" "^7.15.0"
+    debug "^4.1.0"
+    globals "^11.1.0"
+
 "@babel/types@^7.0.0", "@babel/types@^7.12.0", "@babel/types@^7.14.5", "@babel/types@^7.3.0", "@babel/types@^7.3.3", "@babel/types@^7.4.4":
   version "7.14.5"
   resolved "https://registry.nlark.com/@babel/types/download/@babel/types-7.14.5.tgz?cache=0&sync_timestamp=1623280355970&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40babel%2Ftypes%2Fdownload%2F%40babel%2Ftypes-7.14.5.tgz#3bb997ba829a2104cedb20689c4a5b8121d383ff"
   integrity sha1-O7mXuoKaIQTO2yBonEpbgSHTg/8=
   dependencies:
     "@babel/helper-validator-identifier" "^7.14.5"
+    to-fast-properties "^2.0.0"
+
+"@babel/types@^7.14.8", "@babel/types@^7.15.0":
+  version "7.15.0"
+  resolved "https://bnpm.byted.org/@babel/types/-/@babel/types-7.15.0.tgz#61af11f2286c4e9c69ca8deb5f4375a73c72dcbd"
+  integrity sha1-Ya8R8ihsTpxpyo3rX0N1pzxy3L0=
+  dependencies:
+    "@babel/helper-validator-identifier" "^7.14.9"
     to-fast-properties "^2.0.0"
 
 "@bcoe/v8-coverage@^0.2.3":
@@ -4662,11 +4787,6 @@ locate-path@^5.0.0:
   integrity sha1-Gvujlq/WdqbUJQTQpno6frn2KqA=
   dependencies:
     p-locate "^4.1.0"
-
-lodash-es@^4.17.20:
-  version "4.17.21"
-  resolved "https://registry.npm.taobao.org/lodash-es/download/lodash-es-4.17.21.tgz#43e626c46e6591b7750beb2b50117390c609e3ee"
-  integrity sha1-Q+YmxG5lkbd1C+srUBFzkMYJ4+4=
 
 lodash.clonedeep@^4.5.0:
   version "4.5.0"

@@ -1,8 +1,8 @@
-import { Node } from "@babel/core";
-import * as t from "@babel/types";
+import { Node } from '@babel/core';
+import * as t from '@babel/types';
 
 export function isDefineComponentCall(node?: Node | null): boolean {
-  return t.isCallExpression(node) && t.isIdentifier(node.callee) && node.callee.name === "defineComponent";
+  return t.isCallExpression(node) && t.isIdentifier(node.callee) && node.callee.name === 'defineComponent';
 }
 
 export function parseComponentDecls(node: t.VariableDeclaration): { name: string }[] {

@@ -1,9 +1,8 @@
-import path from 'path'
-import webpack from 'webpack'
-import { createFsFromVolume, Volume } from 'memfs'
-interface Options {}
+import path from 'path';
+import webpack from 'webpack';
+import { createFsFromVolume, Volume } from 'memfs';
 
-export default (fixture: string, options: Options = {}): Promise<string | undefined> => {
+export default (fixture: string): Promise<string | undefined> => {
   const compiler = webpack({
     context: __dirname,
     entry: fixture,
@@ -26,7 +25,6 @@ export default (fixture: string, options: Options = {}): Promise<string | undefi
             },
             {
               loader: path.resolve(__dirname, '../src/index.ts'),
-              options,
             },
           ],
         },
@@ -35,31 +33,31 @@ export default (fixture: string, options: Options = {}): Promise<string | undefi
     resolve: {
       extensions: ['.jsx', '.tsx', '.ts', '.js'],
     },
-  })
+  });
 
-  const mfs = createFsFromVolume(new Volume())
-  compiler.outputFileSystem = mfs
-  compiler.outputFileSystem.join = path.join.bind(path)
+  const mfs = createFsFromVolume(new Volume());
+  compiler.outputFileSystem = mfs;
+  compiler.outputFileSystem.join = path.join.bind(path);
 
   return new Promise((resolve) => {
     compiler.run((err, stats) => {
-      expect(err).toBeNull()
+      expect(err).toBeNull();
       if (stats?.hasErrors()) {
-        return console.error(stats.toString('errors-only'))
+        return console.error(stats.toString('errors-only'));
       }
-      expect(stats?.hasErrors()).toBeFalsy()
+      expect(stats?.hasErrors()).toBeFalsy();
       if (!stats) {
-        console.error('stats is undefined')
+        console.error('stats is undefined');
       } else {
-        const modules = stats.toJson({ source: true }).modules
+        const modules = stats.toJson({ source: true }).modules;
         if (!modules) {
-          console.error('modules is undefined')
+          console.error('modules is undefined');
         }
-        expect(modules).not.toBeUndefined()
+        expect(modules).not.toBeUndefined();
         if (modules) {
-          resolve(modules[0].source?.toString())
+          resolve(modules[0].source?.toString());
         }
       }
-    })
-  })
-}
+    });
+  });
+};

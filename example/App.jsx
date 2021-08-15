@@ -1,7 +1,7 @@
-import { defineComponent } from "vue";
-import A from "./A";
-import { B } from "./B";
-import C from "./C";
+import { defineComponent } from 'vue';
+import A from './A';
+import { B } from './B';
+import C from './C';
 
 const App = defineComponent({
   data() {
@@ -28,4 +28,5 @@ const App = defineComponent({
     );
   },
 });
+
 export default App;

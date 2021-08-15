@@ -1,13 +1,13 @@
-const { resolve } = require("path");
+const { resolve } = require('path');
 
 module.exports = {
-  mode: "development",
+  mode: 'development',
   entry: {
-    app: resolve(__dirname, "./index.js"),
+    app: resolve(__dirname, './index.js'),
   },
   output: {
-    path: resolve(__dirname, "./dist"),
-    publicPath: "/dist/",
+    path: resolve(__dirname, './dist'),
+    publicPath: '/dist/',
   },
   module: {
     rules: [
@@ -15,13 +15,13 @@ module.exports = {
         test: /\.(j|t)sx?$/,
         use: [
           {
-            loader: "babel-loader",
+            loader: 'babel-loader',
             options: {
-              presets: ["@babel/preset-env", "@babel/preset-typescript"],
-              plugins: ["@vue/babel-plugin-jsx"],
+              presets: ['@babel/preset-env', '@babel/preset-typescript'],
+              plugins: ['@vue/babel-plugin-jsx'],
             },
           },
-          "vue-jsx-hot-loader",
+          'vue-jsx-hot-loader',
         ],
       },
     ],
@@ -32,12 +32,12 @@ module.exports = {
     open: true,
   },
   resolve: {
-    extensions: [".jsx", ".js", ".ts", ".tsx"],
+    extensions: ['.jsx', '.js', '.ts', '.tsx'],
   },
   resolveLoader: {
     alias: {
-      "vue-jsx-hot-loader": require.resolve("../"),
+      'vue-jsx-hot-loader': require.resolve('../'),
     },
   },
-  devtool: "cheap-module-eval-source-map",
+  devtool: 'inline-source-map',
 };

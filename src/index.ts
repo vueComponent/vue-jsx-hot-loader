@@ -1,23 +1,22 @@
-import hash from "hash-sum";
-import * as path from "path";
-import { LoaderContext } from "webpack";
-import * as t from "@babel/types";
-import { parse } from "@babel/parser";
-import { isDefineComponentCall, parseComponentDecls } from "./utils";
+import hash from 'hash-sum';
+import * as path from 'path';
+import { LoaderContext } from 'webpack';
+import * as t from '@babel/types';
+import { parse } from '@babel/parser';
+import { isDefineComponentCall, parseComponentDecls } from './utils';
 
-export interface Options {}
-
-export default function loader(this: LoaderContext<Options>, source: string): string {
-  if (!(this.mode === "development")) {
+export default function loader(this: LoaderContext<{}>, source: string) {
+  const loaderContext = this;
+  if (!(loaderContext.mode === 'development')) {
     return source;
   }
 
-  const webpackRemainingChain = this.remainingRequest.split("!");
+  const webpackRemainingChain = loaderContext.remainingRequest.split('!');
   const fullPath = webpackRemainingChain[webpackRemainingChain.length - 1];
   const filename = path.relative(process.cwd(), fullPath);
-  const file = parse(source, { sourceType: "module", plugins: ["jsx", "typescript", "decorators-legacy"] });
+  const file = parse(source, { sourceType: 'module', plugins: ['jsx', 'typescript', 'decorators-legacy'] });
 
-  if (!(filename.endsWith(".jsx") || filename.endsWith(".tsx"))) {
+  if (!(filename.endsWith('.jsx') || filename.endsWith('.tsx'))) {
     return source;
   }
 
@@ -68,7 +67,7 @@ export default function loader(this: LoaderContext<Options>, source: string): st
         }
       } else if (isDefineComponentCall(declaration)) {
         hotComponents.push({
-          local: "__default__",
+          local: '__default__',
           id: hash(`${filename}-default`),
         });
         hasDefault = true;
@@ -83,7 +82,7 @@ export default function loader(this: LoaderContext<Options>, source: string): st
         `\nexport default __default__`;
     }
 
-    let callbackCode = "";
+    let callbackCode = '';
     for (const { local, id } of hotComponents) {
       _source += `\n${local}.__hmrId = '${id}'` + `\n__VUE_HMR_RUNTIME__.createRecord('${id}', ${local})`;
       callbackCode += `\n__VUE_HMR_RUNTIME__.reload("${id}", ${local})`;

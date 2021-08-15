@@ -107,3 +107,109 @@ if (module.hot) {
 `;
 
 exports[`vue-jsx-hot-loader test cases file t should be transformed right 1`] = `"export const test = \\"123\\";"`;
+
+exports[`vue-jsx-hot-loader test cases should work with export default in jsx 1`] = `
+"import { createVNode as _createVNode, createTextVNode as _createTextVNode } from \\"vue\\";
+export default (() => _createVNode(\\"div\\", null, [_createTextVNode(\\"23411dd\\")]));"
+`;
+
+exports[`vue-jsx-hot-loader test cases should work with export default in tsx 1`] = `
+"import { createVNode as _createVNode } from \\"vue\\";
+import { defineComponent } from \\"vue\\";
+
+const __default__ = defineComponent({
+  setup() {
+    const string = \\"component C\\";
+    return () => _createVNode(\\"div\\", null, [string]);
+  }
+
+});
+
+export default __default__;
+__default__.__hmrId = 'b7ebfcf0';
+
+__VUE_HMR_RUNTIME__.createRecord('b7ebfcf0', __default__);
+/* hot reload */
+
+
+if (module.hot) {
+  module.hot.accept();
+
+  __VUE_HMR_RUNTIME__.reload(\\"b7ebfcf0\\", __default__);
+}"
+`;
+
+exports[`vue-jsx-hot-loader test cases should work with export default referencing variable declaration 1`] = `
+"import { createVNode as _createVNode, createTextVNode as _createTextVNode, Fragment as _Fragment } from \\"vue\\";
+import { defineComponent } from 'vue';
+import A from './A';
+import { B } from './B';
+import C from './C';
+const App = defineComponent({
+  data() {
+    return {
+      a: 1
+    };
+  },
+
+  render() {
+    const {
+      a
+    } = this;
+    return _createVNode(_Fragment, null, [a, _createVNode(\\"div\\", {
+      \\"onClick\\": () => {
+        this.a++;
+      }
+    }, [_createTextVNode(\\"Hello World!\\")]), _createVNode(A, null, null), _createVNode(B, null, null), _createVNode(C, null, null)]);
+  }
+
+});
+export default App;
+App.__hmrId = '4a166efb';
+
+__VUE_HMR_RUNTIME__.createRecord('4a166efb', App);
+/* hot reload */
+
+
+if (module.hot) {
+  module.hot.accept();
+
+  __VUE_HMR_RUNTIME__.reload(\\"4a166efb\\", App);
+}"
+`;
+
+exports[`vue-jsx-hot-loader test cases should work with named exports 1`] = `
+"import { createVNode as _createVNode, createTextVNode as _createTextVNode, Fragment as _Fragment } from \\"vue\\";
+import { defineComponent } from 'vue';
+const B = defineComponent({
+  data() {
+    return {
+      a: 1
+    };
+  },
+
+  render() {
+    const {
+      a
+    } = this;
+    return _createVNode(_Fragment, null, [_createVNode(\\"div\\", {
+      \\"onClick\\": () => {
+        this.a++;
+      }
+    }, [a, _createTextVNode(\\"d4s\\")]), _createVNode(\\"span\\", null, [_createTextVNode(\\"2\\")])]);
+  }
+
+});
+export { B };
+B.__hmrId = '6f548b3d';
+
+__VUE_HMR_RUNTIME__.createRecord('6f548b3d', B);
+/* hot reload */
+
+
+if (module.hot) {
+  module.hot.accept();
+
+  __VUE_HMR_RUNTIME__.reload(\\"6f548b3d\\", B);
+}"
+`;
