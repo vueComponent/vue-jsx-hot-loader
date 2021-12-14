@@ -33,7 +33,6 @@ export default function loader(
     id: string;
   }[] = [];
   let hasDefault = false;
-
   for (const node of file.program.body) {
     if (t.isVariableDeclaration(node)) {
       declaredComponents.push(...parseComponentDecls(node));
@@ -77,6 +76,11 @@ export default function loader(
           id: hash(`${filename}-default`)
         });
         hasDefault = true
+      } else if (t.isClassDeclaration(declaration)) {
+        hotComponents.push({
+          local: declaration.id.name,
+          id: hash(`${filename}-default`)
+        });
       }
     }
   }

@@ -1,3 +1,4 @@
+import '@abraham/reflection'
 import { createApp } from 'vue';
 import App from './App';
 
