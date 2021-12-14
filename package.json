@@ -37,13 +37,16 @@
     "lodash-es": "^4.17.20"
   },
   "devDependencies": {
+    "@abraham/reflection": "^0.8.0",
     "@babel/core": "^7.12.10",
     "@types/loader-utils": "^2.0.1",
     "@vue/babel-plugin-jsx": "^1.0.0",
     "babel-loader": "^8.2.2",
+    "injection-js": "^2.4.0",
     "jest": "^26.6.3",
     "typescript": "^4.0.3",
-    "vue": "^3.0.5",
+    "vue": "^3.2.26",
+    "vue3-oop": "^0.0.16",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.0.0",
     "webpack-dev-server": "^3.11.1"
